@@ -3,7 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Task-1</title>
   </head>
-  <body></body>
+  <body>
+    <div id="container"></div>
+  </body>
+  <script>
+    const getData = (url) => {
+      fetch(url)
+        .then((response) => response.json())
+        .then((json) => {
+          handleResponse(json);
+        })
+        .catch((err) => console.log(err));
+
+      function handleResponse({ profile }) {
+        const {
+          name,
+          job,
+          image_profile,
+          user_email,
+          image_banner,
+          background,
+        } = profile;
+        //console.log(profile);
+        const card = `<div class="card" style=" background-color: #${background};">
+      <div class="banner">
+          <img 
+            src="${image_banner}"
+            alt="Banner"
+          />
+        </div>
+        <div class="avatar" >
+          <img src="${image_profile}" alt="Avatar"  />
+        </div>
+        <div class="info">
+          <div class="name">${name}</div>
+          <div class="job">${job}</div>
+          <div class="email">${user_email}</div>
+        </div>
+      </div>
+    </div>`;
+        document.getElementById("container").innerHTML = card;
+      }
+    };
+    getData("");
+  </script>
 </html>
